@@ -1,29 +1,28 @@
 var app = new Vue({
   el: '#app',
   data:{
-    message: 'Hello Vue.js',
-    newItem: "",
-    todos: []
+  bpi: null
   },
+  mounted: function() {
+    axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
+    .then(function(response){
+      console.log(response.data.bpi)
+      // responseでapiサーバーからの返り値を取得できる
+      // dataの中の欲しい値 今回はbpiなのでドットで繋いで取得する
+      
+      console.log(response.data.bpi.USD.rate_float)
+      // bpiの中のUSDのrate_floatを呼び出せる
+      this.bpi = response.data.bpi
+    }.bind(this))
+    // .bind(this)でbpiで使える様にしている
+    // dataのプロパティに紐づけている
 
-  methods:{
-    addItem:function(event){
-      // eventにはeventオブジェクトが入っている
-      // alert(event)
-      var todo ={
-        item: this.newItem,
-        isDone: false
-      }
-      if (this.newItem == "") return
-      this.todos.push(todo)
-      this.newItem = ""
-    },
-
-    deleteItem:function(index){
-
-      // alert(index)
-      this.todos.splice(index,1)
-      // 配列の中身を削除する sliceと同じかな 第一引数がスタートで第二引数が範囲
-    }
+    // 補足メモ
+    // .bind(this)を使用しないと
+    // windowオブジェクトに保存されるイメージ
+    // windowは、今はあらゆるオブジェクトの大元と言うイメージ思っている
+    // それをvue内で使用する為にbindで紐付けしている
+    // bindも少しややこしい
+    // reactの時よりは少しだけわかってきたかも
   }
 })
