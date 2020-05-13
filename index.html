@@ -11,7 +11,9 @@
     <h2>
       Bitcoin Price
     </h2>
-    <ul>
+    <ul v-cloak>
+      <!-- v-cloackを使うことによってページ更新時にマスタッシュ構文が表示されないようにする -->
+      <!-- cssと組み合わせる必要がある -->
       <li v-for="(rate, currency) in bpi">
         {{currency}} : {{rate.rate_float}}
         <!-- keyのcurrencyを指定する事でrateのcodeを取れる -->
