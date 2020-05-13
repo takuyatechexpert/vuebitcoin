@@ -1,7 +1,8 @@
 var app = new Vue({
   el: '#app',
   data:{
-  bpi: null
+  bpi: null,
+  hasError: false
   },
   mounted: function() {
     axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
@@ -28,6 +29,17 @@ var app = new Vue({
     .catch(function(error){
       console.log(error)
       // catchでerrorを取ってこれる
-    })
+      this.hasError = true
+      // あらかじめ定義したhasError=falseをエラーを掴んだ時にtrueにする
+      // hasErrorを使う為にまたbindをしようする
+      // スコープが違うと言うことか?
+    }.bind(this))
+  },
+  filters:{
+    currencyDecimal(value){
+      return value.toFixed(2)
+      // toFixedメソッド  固定小数点表記を用いてフォーマットする
+      // 簡単に言うと小数点以下の数
+    }
   }
 })
