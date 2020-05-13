@@ -13,12 +13,12 @@
     </h2>
     <ul>
       <li v-for="(rate, currency) in bpi">
-        {{currency}} : {{rate.rate_float}}
+        {{currency}} : {{rate.rate_float | currencyDecimal}}
         <!-- keyのcurrencyを指定する事でrateのcodeを取れる -->
         <!-- keyを指定しなくともドットで繋いでとる事ができる -->
       </li>
     </ul>
-
+    
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>

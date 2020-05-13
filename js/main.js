@@ -29,5 +29,12 @@ var app = new Vue({
       console.log(error)
       // catchでerrorを取ってこれる
     })
+  },
+  filters:{
+    currencyDecimal(value){
+      return value.toFixed(2)
+      // toFixedメソッド  固定小数点表記を用いてフォーマットする
+      // 簡単に言うと小数点以下の数
+    }
   }
 })
