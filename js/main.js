@@ -24,5 +24,10 @@ var app = new Vue({
     // それをvue内で使用する為にbindで紐付けしている
     // bindも少しややこしい
     // reactの時よりは少しだけわかってきたかも
+
+    .catch(function(error){
+      console.log(error)
+      // catchでerrorを取ってこれる
+    })
   }
 })
