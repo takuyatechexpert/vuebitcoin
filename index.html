@@ -11,26 +11,23 @@
     <h2>
       Bitcoin Price
     </h2>
-    <ul v-cloak>
-      <!-- v-cloackを使うことによってページ更新時にマスタッシュ構文が表示されないようにする -->
-      <!-- cssと組み合わせる必要がある -->
-      <li v-for="(rate, currency) in bpi">
-        {{currency}} : {{rate.rate_float}}
-        <!-- keyのcurrencyを指定する事でrateのcodeを取れる -->
-        <!-- keyを指定しなくともドットで繋いでとる事ができる -->
-      </li>
-    </ul>
 
     <section v-if="hasError">
       Error.
     </section>
 
     <section v-else>
-      <ul>
+      <div v-if="loading">
+        Loading...
+      </div>
+      <ul v-cloak v-else>
+        <!-- v-cloackを使うことによってページ更新時にマスタッシュ構文が表示されないようにする -->
+        <!-- cssと組み合わせる必要がある -->
         <li v-for="(rate, currency) in bpi">
           {{currency}} : {{rate.rate_float | currencyDecimal}}
           <!-- keyのcurrencyを指定する事でrateのcodeを取れる -->
           <!-- keyを指定しなくともドットで繋いでとる事ができる -->
+          <!-- currencyDecimalはfilterとして小数点以下の数をフィルタリングしている -->
         </li>
       </ul>
     </section>

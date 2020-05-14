@@ -2,7 +2,8 @@ var app = new Vue({
   el: '#app',
   data:{
   bpi: null,
-  hasError: false
+  hasError: false,
+  loading: true
   },
   mounted: function() {
     axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
@@ -34,7 +35,16 @@ var app = new Vue({
       // hasErrorを使う為にまたbindをしようする
       // スコープが違うと言うことか?
     }.bind(this))
+
+    .finally(function(){
+      // // finallyは固有のもの
+      // loadingは任意で決めた値
+      this.loading = false
+    }.bind(this))
+    // finallyは通信に関する処理が終わった後に読み込まれる
+    // 例によてbindする
   },
+
   filters:{
     currencyDecimal(value){
       return value.toFixed(2)
